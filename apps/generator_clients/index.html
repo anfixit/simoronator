@@ -1,34 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Генератор клиентов</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Генератор клиентов</title>
+    <link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-  <div class="container">
+<div class="container">
+    <div class="icon-wrapper">
+        <img src="icon512.png" alt="Иконка генератора" class="app-icon">
+    </div>
+
+    <div class="info-links">
+        <a href="./help/index.html" target="_blank">📖 Что это такое и как это работает?</a>
+    </div>
+
     <h1>📈 Мегамощный Генератор Клиентов</h1>
 
     <form id="client-form">
-      <label for="who">👤 К кому должны приходить клиенты:</label>
-      <input type="text" id="who" placeholder="Анфиса, разработчик Telegram-ботов" required />
+        <label for="who">👤 К кому должны приходить клиенты:</label>
+        <input id="who" placeholder="Анфиса, разработчик Telegram-ботов" required type="text"/>
 
-      <label for="where">📍 Куда направить поток:</label>
-      <input type="text" id="where" placeholder="https://anfixit.ru / Telegram @Anfikus" required />
+        <label for="where">📍 Куда направить поток:</label>
+        <input id="where" placeholder="https://anfixit.ru / Telegram @Anfikus" required type="text"/>
 
-      <button type="submit">🔌 Запустить генератор</button>
+        <button type="submit">🔌 Запустить генератор</button>
     </form>
 
-    <div id="generation-zone" class="hidden">
-      <div class="radar">
-        <div class="pulse"></div>
-        <p>🔄 Генерация клиентов...</p>
-        <div id="clients-log"></div>
-      </div>
+    <div class="hidden" id="generation-zone">
+        <div class="radar">
+            <div class="pulse"></div>
+            <p>🔄 Генерация клиентов...</p>
+            <div id="clients-log"></div>
+        </div>
     </div>
-  </div>
+</div>
 
-  <script src="app.js"></script>
+<script src="app.js"></script>
 </body>
 </html>

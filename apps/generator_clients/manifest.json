@@ -1,0 +1,16 @@
+{
+  "name": "Генератор клиентов Симорон",
+  "short_name": "ClientsGen",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0e2f2e",
+  "theme_color": "#2ee5ab",
+  "description": "Магическое миниприложение для притяжения клиентов из Вселенной.",
+  "icons": [
+    {
+      "src": "icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
