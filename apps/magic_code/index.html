@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Волшебный калькулятор Симорон</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="icon-wrapper">
+      <img src="icon512.png" alt="Иконка калькулятора" class="app-icon">
+    </div>
+
+    <div class="info-links">
+      <a href="./help/index.html" target="_blank">📖 Что это такое и как это работает?</a>
+    </div>
+
+    <h1>🔮 Волшебный калькулятор Симорон</h1>
+
+    <form id="magic-form">
+      <label for="intent">🧠 Намерение:</label>
+      <input type="text" id="intent" placeholder="Например: Для радости и изобилия" required />
+
+      <label for="identity">📜 ФИО и дата рождения:</label>
+      <input type="text" id="identity" placeholder="Иванова Светлана Николаевна 02.07.1985" required />
+
+      <button type="submit">✨ Получить код</button>
+    </form>
+
+    <div id="result" class="hidden">
+      <h2>🔢 Твой волшебный код:</h2>
+      <p id="code-output"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

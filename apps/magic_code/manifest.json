@@ -1,0 +1,16 @@
+{
+  "name": "Волшебный калькулятор Симорон",
+  "short_name": "MagicCode",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#121212",
+  "theme_color": "#5ae6c3",
+  "description": "Миниапп для генерации личного кода исполнения желания",
+  "icons": [
+    {
+      "src": "https://simoronator.ru/icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
