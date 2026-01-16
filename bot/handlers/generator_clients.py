@@ -37,6 +37,7 @@ async def open_generator_clients(
         config: Объект конфигурации приложения
     """
     try:
+        # Полный URL с путём к приложению
         webapp_url = (
             f"{config.webapp.base_url}"
             f"{WEBAPP_PATHS['generator_clients']}"
@@ -61,7 +62,7 @@ async def open_generator_clients(
 
         logger.info(
             f"Пользователь {message.from_user.id} "
-            f"открыл generator_clients"
+            f"открыл generator_clients: {webapp_url}"
         )
 
     except Exception as e:
