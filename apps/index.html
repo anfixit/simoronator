@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>🔮 Симоронатор — Магические ритуалы</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            body {
+                font-family: "Segoe UI", sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #fff;
+            }
+            .container {
+                text-align: center;
+                padding: 2rem;
+                max-width: 600px;
+            }
+            h1 {
+                font-size: 3rem;
+                margin-bottom: 1rem;
+            }
+            p {
+                font-size: 1.2rem;
+                margin-bottom: 2rem;
+                opacity: 0.9;
+            }
+            .rituals {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .ritual-btn {
+                background: rgba(255, 255, 255, 0.2);
+                border: 2px solid rgba(255, 255, 255, 0.3);
+                padding: 1.5rem;
+                border-radius: 1rem;
+                text-decoration: none;
+                color: #fff;
+                font-size: 1.2rem;
+                transition: all 0.3s ease;
+                backdrop-filter: blur(10px);
+            }
+            .ritual-btn:hover {
+                background: rgba(255, 255, 255, 0.3);
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🔮 Симоронатор</h1>
+            <p>Магические ритуалы исполнения желаний</p>
+
+            <div class="rituals">
+                <a href="/magic_code/" class="ritual-btn">
+                    🔮 Волшебный калькулятор
+                </a>
+                <a href="/generator_clients/" class="ritual-btn">
+                    🧲 Генератор клиентов
+                </a>
+                <a href="/MatrixMessage/" class="ritual-btn">
+                    📡 Matrix Message
+                </a>
+            </div>
+        </div>
+    </body>
+</html>
