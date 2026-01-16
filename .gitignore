@@ -1,119 +1,32 @@
-# ───────────────
-# ОС и среда
-# ───────────────
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+bot.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
 Thumbs.db
 
-# PyCharm
-.idea/
-*.iml
-
-# macOS system files
-.AppleDouble
-.LSOverride
-Icon?
-
-# ───────────────
-# Python
-# ───────────────
-__pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.pyc
-*.so
-
-# venv & poetry
-venv/
-.env
-.env.*
-
-# Jupyter
-.ipynb_checkpoints/
-
-# coverage / test / profiling
-coverage.*
-.cache/
-*.cover
-*.log
-.tox/
-.pytest_cache/
-nosetests.xml
-test-results/
-
-# build
-dist/
-build/
-*.egg-info/
-.eggs/
-*.manifest
-
-# pip tools
-pip-log.txt
-pip-delete-this-directory.txt
-
-# mypy
-.mypy_cache/
-.dmypy.json
-dmypy.json
-
-# pyright / pyre
-.pyright/
-.pyre/
-
-# ───────────────
-# Node.js (если будет фронт)
-# ───────────────
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# ───────────────
-# Frontend (если будет miniapp)
-# ───────────────
-*.log
-*.bak
-*.tmp
-.cache/
-*.map
-
-# ───────────────
-# VS Code, если кто-то захочет открыть
-# ───────────────
-.vscode/
-
-# ───────────────
-# Git
-# ───────────────
-*.orig
-*.swp
-*.swo
-*.rej
-*.merge_file
-
-# ───────────────
-# Секреты и токены
-# ───────────────
-*.key
-*.pem
-*.crt
-*.pub
-*.gpg
-*.p12
-*.jks
-
-# ───────────────
-# Custom
-# ───────────────
-local_settings.py
-logs/
-*.sqlite3
-__snapshots__/
-
-# ───────────────
-# Переменные окружения
-# ───────────────
-.env
-.env.*
-!env.sample
+# Project specific
+data/*
+!data/.gitkeep

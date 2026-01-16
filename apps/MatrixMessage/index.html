@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>MatrixMessage</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="icon-wrapper">
+                <img
+                    src="icon512.png"
+                    alt="MatrixMessage Icon"
+                    class="app-icon"
+                />
+            </div>
+
+            <div class="info-links">
+                <a href="./help/index.html" target="_blank"
+                    >📖 Как работает связь с Матрицей?</a
+                >
+            </div>
+
+            <h1>📡 Matrix Message</h1>
+
+            <form id="matrix-form">
+                <label for="message">🧠 Что ты хочешь передать Матрице?</label>
+                <textarea
+                    id="message"
+                    placeholder="Введите своё намерение..."
+                    required
+                ></textarea>
+                <button type="submit">📤 Отправить сигнал</button>
+            </form>
+
+            <div id="response" class="hidden">
+                <div class="matrix-flux">⏳ Отправка...</div>
+                <div id="reply"></div>
+            </div>
+        </div>
+
+        <script src="app.js"></script>
+    </body>
+</html>

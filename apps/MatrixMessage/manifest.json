@@ -1,0 +1,16 @@
+{
+  "name": "MatrixMessage",
+  "short_name": "MatrixMsg",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#00ff99",
+  "description": "Отправка магических сообщений в Матрицу — симоронский ритуал связи с Потоком.",
+  "icons": [
+    {
+      "src": "icon512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

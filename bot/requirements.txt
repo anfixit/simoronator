@@ -1,0 +1,4 @@
+aiogram==3.15.0
+environs==11.0.0
+pyyaml==6.0.2
+aiofiles==24.1.0
