@@ -96,36 +96,34 @@ document.addEventListener("DOMContentLoaded", () => {
    * Показывает финальные сообщения о завершении.
    */
   function showCompletionMessages() {
-    showCompletionMessage(
-      "✅ <span style='color: #2ee5ab;'>" + "Поток клиентов направлен!</span>",
-      0,
-    );
-
-    showCompletionMessage(
-      "✨ <em>Ждите — поток уже на пути к вам...</em>",
-      CONFIG.COMPLETION_DELAY,
-    );
-  }
-
-  /**
-   * Показывает одно финальное сообщение с задержкой.
-   *
-   * @param {string} html - HTML содержимое сообщения
-   * @param {number} delay - Задержка перед показом (мс)
-   */
-  function showCompletionMessage(html, delay) {
+    // Первое сообщение
     setTimeout(() => {
-      const msg = document.createElement("div");
-      msg.innerHTML = html;
-      msg.style.marginTop = delay === 0 ? "1rem" : "0.8rem";
-      msg.style.opacity = "0";
-      msg.style.transition =
-        delay === 0 ? "opacity 0.6s ease" : "opacity 0.8s ease";
-      log.appendChild(msg);
+      const msg1 = document.createElement("div");
+      msg1.innerHTML =
+        "✅ <span style='color: #2ee5ab;'>" +
+        "Поток клиентов направлен!</span>";
+      msg1.style.marginTop = "1rem";
+      msg1.style.opacity = "0";
+      msg1.style.transition = "opacity 0.6s ease";
+      log.appendChild(msg1);
 
       requestAnimationFrame(() => {
-        msg.style.opacity = "1";
+        msg1.style.opacity = "1";
       });
-    }, delay);
+    }, 0);
+
+    // Второе сообщение
+    setTimeout(() => {
+      const msg2 = document.createElement("div");
+      msg2.innerHTML = "✨ <em>Ждите — поток уже на пути к вам...</em>";
+      msg2.style.marginTop = "0.8rem";
+      msg2.style.opacity = "0";
+      msg2.style.transition = "opacity 0.8s ease";
+      log.appendChild(msg2);
+
+      requestAnimationFrame(() => {
+        msg2.style.opacity = "1";
+      });
+    }, CONFIG.COMPLETION_DELAY);
   }
 });
