@@ -10,67 +10,140 @@
                 padding: 0;
                 box-sizing: border-box;
             }
+
             body {
                 font-family: "Segoe UI", sans-serif;
-                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                background: linear-gradient(135deg, #0a2f2e 0%, #1a1a2e 100%);
                 min-height: 100vh;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 color: #fff;
             }
+
             .container {
                 text-align: center;
                 padding: 2rem;
                 max-width: 600px;
             }
-            h1 {
-                font-size: 3rem;
-                margin-bottom: 1rem;
+
+            .logo {
+                font-size: 4rem;
+                margin-bottom: 0.5rem;
+                animation: float 3s ease-in-out infinite;
             }
-            p {
-                font-size: 1.2rem;
-                margin-bottom: 2rem;
+
+            @keyframes float {
+                0%,
+                100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-10px);
+                }
+            }
+
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 0.5rem;
+                background: linear-gradient(135deg, #2ee5ab, #a78bfa);
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+            }
+
+            .tagline {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+                color: #2ee5ab;
                 opacity: 0.9;
             }
+
             .rituals {
                 display: flex;
                 flex-direction: column;
                 gap: 1rem;
             }
-            .ritual-btn {
-                background: rgba(255, 255, 255, 0.2);
-                border: 2px solid rgba(255, 255, 255, 0.3);
+
+            .ritual-card {
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px solid rgba(46, 229, 171, 0.3);
                 padding: 1.5rem;
                 border-radius: 1rem;
                 text-decoration: none;
                 color: #fff;
-                font-size: 1.2rem;
                 transition: all 0.3s ease;
-                backdrop-filter: blur(10px);
             }
-            .ritual-btn:hover {
-                background: rgba(255, 255, 255, 0.3);
+
+            .ritual-card:hover {
+                background: rgba(46, 229, 171, 0.1);
+                border-color: #2ee5ab;
                 transform: translateY(-5px);
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 10px 30px rgba(46, 229, 171, 0.3);
+            }
+
+            .ritual-icon {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+            }
+            .ritual-title {
+                font-size: 1.3rem;
+                font-weight: 600;
+                margin-bottom: 0.3rem;
+            }
+            .ritual-desc {
+                font-size: 0.9rem;
+                opacity: 0.7;
+            }
+
+            .footer {
+                margin-top: 3rem;
+                font-size: 0.9rem;
+                opacity: 0.6;
+            }
+            .footer a {
+                color: #2ee5ab;
+                text-decoration: none;
+            }
+            .footer a:hover {
+                text-decoration: underline;
             }
         </style>
     </head>
     <body>
         <div class="container">
-            <h1>🔮 Симоронатор</h1>
-            <p>Магические ритуалы исполнения желаний</p>
+            <div class="logo">🔮</div>
+            <h1>Симоронатор</h1>
+            <p class="tagline">Магические ритуалы исполнения желаний</p>
 
             <div class="rituals">
-                <a href="/magic_code/" class="ritual-btn">
-                    🔮 Волшебный калькулятор
+                <a href="/magic_code/" class="ritual-card">
+                    <div class="ritual-icon">🔮</div>
+                    <div class="ritual-title">Волшебный калькулятор</div>
+                    <div class="ritual-desc">
+                        Генерация персонального магического кода
+                    </div>
                 </a>
-                <a href="/generator_clients/" class="ritual-btn">
-                    🧲 Генератор клиентов
+
+                <a href="/generator_clients/" class="ritual-card">
+                    <div class="ritual-icon">🧲</div>
+                    <div class="ritual-title">Генератор клиентов</div>
+                    <div class="ritual-desc">
+                        Визуальный ритуал притяжения клиентов
+                    </div>
                 </a>
-                <a href="/MatrixMessage/" class="ritual-btn">
-                    📡 Matrix Message
+
+                <a href="/MatrixMessage/" class="ritual-card">
+                    <div class="ritual-icon">📡</div>
+                    <div class="ritual-title">Matrix Message</div>
+                    <div class="ritual-desc">
+                        Отправка сообщений в Матрицу <em>(скоро)</em>
+                    </div>
                 </a>
+            </div>
+
+            <div class="footer">
+                Made with 💜 and ✨ magic •
+                <a href="https://t.me/simoronator_bot">@simoronator_bot</a>
             </div>
         </div>
     </body>
