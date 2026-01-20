@@ -9,9 +9,9 @@ HELP_DIR: Final[Path] = BOT_DIR / "help"
 
 # Пути к PWA приложениям
 WEBAPP_PATHS: Final[dict[str, str]] = {
-    "magic_code": "/apps/magic_code/",
-    "generator_clients": "/apps/generator_clients/",
-    "matrix_message": "/apps/MatrixMessage/",
+    "magic_code": "/magic_code/",
+    "generator_clients": "/generator_clients/",
+    "matrix_message": "/MatrixMessage/",
 }
 
 # Сообщения об ошибках
