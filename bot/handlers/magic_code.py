@@ -18,13 +18,19 @@ from aiogram.types import (
     ReplyKeyboardMarkup,
     WebAppInfo,
 )
+
 from config import Config
 from constants import (
+    BTN_BEAUTIFUL_VERSION,
+    BTN_HOW_IT_WORKS,
     BTN_OPEN_MAGIC_CODE,
+    BTN_QUICK_IN_BOT,
+    BTN_TO_MAIN_MENU,
     ERROR_GENERIC,
     ERROR_WEBAPP,
     MIN_FIO_WORDS,
     MSG_WEBAPP_READY,
+    PARSE_MODE_HTML,
     PARSE_MODE_MARKDOWN,
     TEXTS_DIR,
     WEBAPP_PATHS,
@@ -55,7 +61,7 @@ class MagicCodeStates(StatesGroup):
     waiting_for_fio_birthdate = State()
 
 
-@router.message(F.text.lower() == "/magic_code")
+@router.message(F.text == "/magic_code")
 async def magic_code_menu(message: Message) -> None:
     """
     Меню выбора режима работы калькулятора.
@@ -68,14 +74,26 @@ async def magic_code_menu(message: Message) -> None:
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text="✨ Красивая версия (PWA)",
+                        text=BTN_BEAUTIFUL_VERSION,
                         callback_data="magic_code_pwa"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        text="⚡ Быстро в боте",
+                        text=BTN_QUICK_IN_BOT,
                         callback_data="magic_code_bot"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text=BTN_HOW_IT_WORKS,
+                        callback_data="help_magic_code"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text=BTN_TO_MAIN_MENU,
+                        callback_data="main_menu"
                     )
                 ]
             ]
@@ -83,9 +101,11 @@ async def magic_code_menu(message: Message) -> None:
 
         await message.answer(
             "🔮 <b>Волшебный калькулятор</b>\n\n"
+            "Генерация персонального магического кода "
+            "из твоего намерения.\n\n"
             "Выбери способ запуска:",
             reply_markup=keyboard,
-            parse_mode="HTML"
+            parse_mode=PARSE_MODE_HTML
         )
 
         logger.info(
@@ -178,6 +198,90 @@ async def start_magic_code_bot(
         logger.error(f"Ошибка в start_magic_code_bot: {e}")
         await callback.message.answer(ERROR_GENERIC)
         await callback.answer()
+
+
+@router.callback_query(F.data == "help_magic_code")
+async def show_help_magic_code(callback) -> None:
+    """
+    Показать справку по Волшебному калькулятору.
+
+    Args:
+        callback: Callback query
+    """
+    try:
+        from handlers.help import read_help
+
+        text = read_help("magic_code")
+        if text:
+            keyboard = InlineKeyboardMarkup(
+                inline_keyboard=[
+                    [
+                        InlineKeyboardButton(
+                            text="← Назад",
+                            callback_data="back_to_magic_code"
+                        )
+                    ]
+                ]
+            )
+            await callback.message.edit_text(
+                text,
+                parse_mode=PARSE_MODE_HTML,
+                reply_markup=keyboard
+            )
+        else:
+            await callback.message.edit_text(
+                "❗ Справка временно недоступна."
+            )
+
+        await callback.answer()
+
+    except Exception as e:
+        logger.error(f"Ошибка в show_help_magic_code: {e}")
+        await callback.answer("Ошибка загрузки справки")
+
+
+@router.callback_query(F.data == "back_to_magic_code")
+async def back_to_magic_code_menu(callback, message: Message = None) -> None:
+    """
+    Возврат в меню magic_code.
+
+    Args:
+        callback: Callback query
+        message: Message (опционально)
+    """
+    msg = message or callback.message
+    msg.text = "/magic_code"
+    await magic_code_menu(msg)
+    if callback:
+        await callback.answer()
+
+
+@router.callback_query(F.data == "main_menu")
+async def back_to_main_menu(callback) -> None:
+    """
+    Возврат в главное меню.
+
+    Args:
+        callback: Callback query
+    """
+    try:
+        from handlers.start import get_main_menu_keyboard
+        from constants import WELCOME_TEXT
+
+        keyboard = get_main_menu_keyboard()
+
+        await callback.message.delete()
+        await callback.message.answer(
+            WELCOME_TEXT,
+            reply_markup=keyboard,
+            parse_mode=PARSE_MODE_HTML
+        )
+
+        await callback.answer()
+
+    except Exception as e:
+        logger.error(f"Ошибка в back_to_main_menu: {e}")
+        await callback.answer("Ошибка возврата в меню")
 
 
 @router.message(MagicCodeStates.waiting_for_intent)

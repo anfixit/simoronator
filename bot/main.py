@@ -15,11 +15,8 @@ from config import load_config
 from handlers import (
     generator_clients,
     magic_code,
-)
-from handlers import (
-    generator_clients,
-    magic_code,
     matrix_message,
+    start,
 )
 from handlers import (
     help as help_handler,
@@ -63,10 +60,11 @@ async def main() -> None:
         dp = Dispatcher(storage=storage)
 
         # Регистрация роутеров
+        dp.include_router(start.router)
         dp.include_router(magic_code.router)
         dp.include_router(generator_clients.router)
-        dp.include_router(help_handler.router)
         dp.include_router(matrix_message.router)
+        dp.include_router(help_handler.router)
 
         logger.info("Роутеры зарегистрированы")
 

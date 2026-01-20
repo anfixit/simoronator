@@ -19,10 +19,13 @@ from aiogram.types import (
     ReplyKeyboardRemove,
     WebAppInfo,
 )
-
 from config import Config
 from constants import (
+    BTN_BEAUTIFUL_VERSION,
+    BTN_HOW_IT_WORKS,
     BTN_OPEN_MATRIX,
+    BTN_QUICK_IN_BOT,
+    BTN_TO_MAIN_MENU,
     ERROR_GENERIC,
     ERROR_WEBAPP,
     MSG_WEBAPP_READY,
@@ -54,7 +57,7 @@ class MatrixMessageStates(StatesGroup):
     waiting_for_message = State()
 
 
-@router.message(F.text.lower() == "/matrix_message")
+@router.message(F.text == "/matrix_message")
 async def matrix_message_menu(message: Message) -> None:
     """
     Меню выбора режима работы Matrix Message.
@@ -67,14 +70,26 @@ async def matrix_message_menu(message: Message) -> None:
             inline_keyboard=[
                 [
                     InlineKeyboardButton(
-                        text="✨ Красивая версия (PWA)",
+                        text=BTN_BEAUTIFUL_VERSION,
                         callback_data="matrix_message_pwa"
                     )
                 ],
                 [
                     InlineKeyboardButton(
-                        text="⚡ Быстро в боте",
+                        text=BTN_QUICK_IN_BOT,
                         callback_data="matrix_message_bot"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text=BTN_HOW_IT_WORKS,
+                        callback_data="help_matrix_message"
+                    )
+                ],
+                [
+                    InlineKeyboardButton(
+                        text=BTN_TO_MAIN_MENU,
+                        callback_data="main_menu"
                     )
                 ]
             ]
@@ -186,6 +201,94 @@ async def start_matrix_message_bot(
         logger.error(f"Ошибка в start_matrix_message_bot: {e}")
         await callback.message.answer(ERROR_GENERIC)
         await callback.answer()
+
+
+@router.callback_query(F.data == "help_matrix_message")
+async def show_help_matrix_message(callback) -> None:
+    """
+    Показать справку по Matrix Message.
+
+    Args:
+        callback: Callback query
+    """
+    try:
+        from handlers.help import read_help
+
+        text = read_help("matrix_message")
+        if text:
+            keyboard = InlineKeyboardMarkup(
+                inline_keyboard=[
+                    [
+                        InlineKeyboardButton(
+                            text="← Назад",
+                            callback_data="back_to_matrix_message"
+                        )
+                    ]
+                ]
+            )
+            await callback.message.edit_text(
+                text,
+                parse_mode=PARSE_MODE_HTML,
+                reply_markup=keyboard
+            )
+        else:
+            await callback.message.edit_text(
+                "❗ Справка временно недоступна."
+            )
+
+        await callback.answer()
+
+    except Exception as e:
+        logger.error(f"Ошибка в show_help_matrix_message: {e}")
+        await callback.answer("Ошибка загрузки справки")
+
+
+@router.callback_query(F.data == "back_to_matrix_message")
+async def back_to_matrix_message_menu(
+    callback,
+    message: Message = None
+) -> None:
+    """
+    Возврат в меню matrix_message.
+
+    Args:
+        callback: Callback query
+        message: Message (опционально)
+    """
+    msg = message or callback.message
+    msg.text = "/matrix_message"
+    await matrix_message_menu(msg)
+    if callback:
+        await callback.answer()
+
+
+@router.callback_query(F.data == "main_menu")
+async def back_to_main_menu(callback) -> None:
+    """
+    Возврат в главное меню.
+
+    Args:
+        callback: Callback query
+    """
+    try:
+        from constants import WELCOME_TEXT
+
+        from handlers.start import get_main_menu_keyboard
+
+        keyboard = get_main_menu_keyboard()
+
+        await callback.message.delete()
+        await callback.message.answer(
+            WELCOME_TEXT,
+            reply_markup=keyboard,
+            parse_mode=PARSE_MODE_HTML
+        )
+
+        await callback.answer()
+
+    except Exception as e:
+        logger.error(f"Ошибка в back_to_main_menu: {e}")
+        await callback.answer("Ошибка возврата в меню")
 
 
 @router.message(MatrixMessageStates.waiting_for_message)
