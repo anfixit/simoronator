@@ -16,8 +16,10 @@ from aiogram.types import (
     KeyboardButton,
     Message,
     ReplyKeyboardMarkup,
+    ReplyKeyboardRemove,
     WebAppInfo,
 )
+
 from config import Config
 from constants import (
     BTN_OPEN_MATRIX,
@@ -165,7 +167,12 @@ async def start_matrix_message_bot(
 
         await callback.message.edit_text(
             text,
-            parse_mode=PARSE_MODE_HTML
+            parse_mode=PARSE_MODE_HTML,
+            reply_markup=None
+        )
+        await callback.message.answer(
+            "📝 Жду твоё послание...",
+            reply_markup=ReplyKeyboardRemove()
         )
         await state.set_state(MatrixMessageStates.waiting_for_message)
         await callback.answer()
