@@ -145,7 +145,7 @@ async def open_matrix_message_pwa(
 
         await callback.message.edit_text(MSG_WEBAPP_READY)
         await callback.message.answer(
-            "Нажми кнопку ниже:",
+            "👇",
             reply_markup=keyboard
         )
 

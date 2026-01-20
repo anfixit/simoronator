@@ -18,7 +18,6 @@ from aiogram.types import (
     ReplyKeyboardMarkup,
     WebAppInfo,
 )
-
 from config import Config
 from constants import (
     BTN_BEAUTIFUL_VERSION,
@@ -150,7 +149,7 @@ async def open_magic_code_pwa(
 
         await callback.message.edit_text(MSG_WEBAPP_READY)
         await callback.message.answer(
-            "Нажми кнопку ниже:",
+            "👇",
             reply_markup=keyboard
         )
 
@@ -265,8 +264,9 @@ async def back_to_main_menu(callback) -> None:
         callback: Callback query
     """
     try:
-        from handlers.start import get_main_menu_keyboard
         from constants import WELCOME_TEXT
+
+        from handlers.start import get_main_menu_keyboard
 
         keyboard = get_main_menu_keyboard()
 

@@ -65,7 +65,7 @@ async def generator_clients_menu(message: Message) -> None:
         await message.answer(
             "🧲 <b>Генератор клиентов</b>\n\n"
             "Визуальный ритуал притяжения клиентов.\n"
-            "Доступен только в красивой версии:",
+            "Доступен только в версии-приложении:",
             reply_markup=keyboard,
             parse_mode=PARSE_MODE_HTML
         )
@@ -112,7 +112,7 @@ async def open_generator_clients(
 
         await callback.message.edit_text(MSG_WEBAPP_READY)
         await callback.message.answer(
-            "Нажми кнопку ниже:",
+            "👇",
             reply_markup=keyboard
         )
 
