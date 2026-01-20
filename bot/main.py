@@ -17,6 +17,11 @@ from handlers import (
     magic_code,
 )
 from handlers import (
+    generator_clients,
+    magic_code,
+    matrix_message,
+)
+from handlers import (
     help as help_handler,
 )
 
@@ -61,6 +66,7 @@ async def main() -> None:
         dp.include_router(magic_code.router)
         dp.include_router(generator_clients.router)
         dp.include_router(help_handler.router)
+        dp.include_router(matrix_message.router)
 
         logger.info("Роутеры зарегистрированы")
 

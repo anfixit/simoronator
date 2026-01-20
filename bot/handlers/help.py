@@ -118,3 +118,25 @@ async def help_generator_clients(message: Message) -> None:
     except Exception as e:
         logger.error(f"Ошибка в help_generator_clients: {e}")
         await message.answer(ERROR_GENERIC)
+
+@router.message(F.text == "/help_matrix_message")
+async def help_matrix_message(message: Message) -> None:
+    """
+    Справка по команде /matrix_message.
+
+    Args:
+        message: Сообщение от пользователя
+    """
+    try:
+        text = read_help("matrix_message")
+        if text:
+            await message.answer(text, parse_mode="HTML")
+            logger.info(
+                f"Пользователь {message.from_user.id} "
+                f"запросил справку matrix_message"
+            )
+        else:
+            await message.answer(ERROR_HELP_UNAVAILABLE)
+    except Exception as e:
+        logger.error(f"Ошибка в help_matrix_message: {e}")
+        await message.answer(ERROR_GENERIC)
